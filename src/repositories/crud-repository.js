@@ -17,14 +17,14 @@ class CrudRepository{
       }
     });
     if(!response){
-      throw new AppError('cannot found airplane to destroy',StatusCodes.NOT_FOUND);
+      throw new AppError('cannot found data to destroy',StatusCodes.NOT_FOUND);
     }
     return response;
   }
   async get(modelid){
     const response=await this.model.findByPk(modelid);
     if(!response){
-      throw new AppError('cannot found airplane',StatusCodes.NOT_FOUND);
+      throw new AppError('cannot found data',StatusCodes.NOT_FOUND);
     }
     return response;
   }
@@ -39,7 +39,7 @@ class CrudRepository{
       }
     });
     if(!response){
-      throw new AppError('cannot found airplane to update',StatusCodes.NOT_FOUND);
+      throw new AppError('cannot found data to update',StatusCodes.NOT_FOUND);
     }
     return response;
   }

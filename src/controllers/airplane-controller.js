@@ -67,7 +67,7 @@ async function UpdateAirplane(req,res){
        capacity:req.body.capacity
     });
     SuccessResponse.data=airplane;
-    return res.status(StatusCodes.CREATED)
+    return res.status(StatusCodes.OK)
               .json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error=error;
