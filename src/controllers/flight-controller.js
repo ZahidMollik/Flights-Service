@@ -24,6 +24,20 @@ async function CreateFlight(req,res){
   }
 }
 
+async function GetAllFlights(req,res){
+  try {
+    const flights=await FlightService.GetAllFlights(req.query);
+    SuccessResponse.data=flights;
+    return res.status(StatusCodes.OK)
+              .json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error=error;
+    return res.status(error.statusCode)
+              .json(ErrorResponse);
+  }
+}
+
 module.exports={
   CreateFlight,
+  GetAllFlights
 }
