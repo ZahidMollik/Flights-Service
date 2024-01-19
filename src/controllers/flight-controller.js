@@ -3,7 +3,7 @@ const {SuccessResponse,ErrorResponse}=require('../utils/common')
 const {StatusCodes}=require('http-status-codes')
 async function CreateFlight(req,res){
   try {
-    const flight=await FlightService.createFlight({
+    const flight=await FlightService.CreateFlight({
       flightNumber:req.body.flightNumber,
       airplaneId:req.body.airplaneId,
       departureAirportId:req.body.departureAirportId,
@@ -37,7 +37,21 @@ async function GetAllFlights(req,res){
   }
 }
 
+async function GetFlight(req,res){
+  try {
+    const flight=await FlightService.GetFlight(req.params.id);
+    SuccessResponse.data=flight;
+    return res.status(StatusCodes.CREATED)
+              .json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error=error;
+    return res.status(error.statusCode)
+              .json(ErrorResponse);
+  }
+}
+
 module.exports={
   CreateFlight,
-  GetAllFlights
+  GetAllFlights,
+  GetFlight
 }

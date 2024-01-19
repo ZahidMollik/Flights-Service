@@ -5,7 +5,7 @@ const { StatusCodes } = require('http-status-codes');
 const { Op } = require('sequelize');
 const {CompareDateTime}=require('../utils/helpers')
 
-async function createFlight(data){
+async function CreateFlight(data){
   if(!CompareDateTime.compareDateTime(data.departureTime,data.arrivalTime)){
     throw new AppError('The departure time must be less than the arrival time',StatusCodes.BAD_REQUEST);
   }
@@ -69,8 +69,18 @@ async function GetAllFlights(query){
   }
 }
 
+async function GetFlight(id){
+  try {
+    const flights=await flightrepository.get(id);
+    return flights;
+  } catch (error) {
+    throw new AppError('cannot fetch data from flights',StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
 
 module.exports={
-  createFlight,
-  GetAllFlights
+  CreateFlight,
+  GetAllFlights,
+  GetFlight
 }
