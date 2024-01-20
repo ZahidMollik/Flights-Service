@@ -46,4 +46,16 @@ function validatecreateReq(req,res,next){
   next();
 }
 
-module.exports=validatecreateReq;
+function validateUpdateRemainingSeatsReq(req,res,next){
+  if(!req.body.seats){
+    ErrorResponse.error=new AppError('seats not found in your request',StatusCodes.BAD_REQUEST);
+    return res.status(StatusCodes.BAD_REQUEST)
+              .json(ErrorResponse);
+  }
+  next();
+}
+
+module.exports={
+  validatecreateReq,
+  validateUpdateRemainingSeatsReq
+};
